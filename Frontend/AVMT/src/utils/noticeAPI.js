@@ -3,7 +3,7 @@
 import axios from "axios";
 
 const noticeAPI = axios.create({
-  baseURL: "http://localhost:5000/api/notices",
+  baseURL: `${import.meta.env.VITE_API_URL}/api/notices`,
   withCredentials: true,
 });
 

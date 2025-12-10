@@ -33,7 +33,7 @@ const AlumniIndex = () => {
 
   // ---------- Fetch from Backend ----------
   useEffect(() => {
-    axios.get("http://localhost:5000/api//alumni")
+    axios.get(`${import.meta.env.VITE_API_URL}/api/alumni`)
       .then((res) => setAlumni(res.data))
       .catch(() => setAlumni(dummyAlumni)); // fallback
   }, []);
