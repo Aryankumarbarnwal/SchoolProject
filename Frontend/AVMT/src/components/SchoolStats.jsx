@@ -1,4 +1,4 @@
-import StatsCard from "./statsCard";
+import StatsCard from "./StatsCard";
 
 const SchoolStats = () => {
   const currentYear = new Date().getFullYear();
