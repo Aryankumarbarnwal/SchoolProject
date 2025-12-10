@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState } from "react";
 
 // ---------- Extract Initial Letter ----------
 const getInitialLetter = (name) => {
@@ -13,7 +12,7 @@ const getInitialLetter = (name) => {
   return parts[0]?.charAt(0).toUpperCase() || "?";
 };
 
-// ---------- DEFAULT FALLBACK DATA ----------
+// ---------- DEFAULT STATIC DATA ----------
 const dummyAlumni = [
   { id: 1, name: "Mr. Aryan Raj", company: "Google", position: "Software Engineer", batch: "2021", rank: "2nd Rank in 10th Board" },
   { id: 2, name: "Priya Sharma", company: "Microsoft", position: "Product Manager", batch: "2020", rank: "3rd Rank" },
@@ -25,22 +24,22 @@ const dummyAlumni = [
   { id: 8, name: "Madhuri Jain", company: "Zomato", position: "Marketing Lead", batch: "2015", rank: "5th Rank" },
 ];
 
-// ---------- MAIN COMPONENT ----------
 const AlumniIndex = () => {
-  const [alumni, setAlumni] = useState([]);
+  const [alumni, setAlumni] = useState(dummyAlumni); // useState([]);
   const [visible, setVisible] = useState(6);
   const [mode, setMode] = useState("slider"); // "slider" | "grid"
 
   // ---------- Fetch from Backend ----------
-  useEffect(() => {
-    axios.get(`${import.meta.env.VITE_API_URL}/api/alumni`)
-      .then((res) => setAlumni(res.data))
-      .catch(() => setAlumni(dummyAlumni)); // fallback
-  }, []);
+  // useEffect(() => {
+  //   axios.get(`${import.meta.env.VITE_API_URL}/api/alumni`)
+  //     .then((res) => setAlumni(res.data))
+  //     .catch(() => setAlumni(dummyAlumni)); // fallback
+  // }, []);
 
   const displayed = alumni.slice(0, visible);
 
   const loadMore = () => setVisible((prev) => prev + 3);
+
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-10">
@@ -67,7 +66,6 @@ const AlumniIndex = () => {
               className="inline-block w-64 mx-3 bg-white rounded-3xl p-5 shadow-lg hover:shadow-2xl border border-gray-200 transition-transform hover:-translate-y-1"
               style={{ animation: `fadeIn 0.6s ease ${index * 0.1}s` }}
             >
-              {/* Avatar */}
               <div className="flex justify-center mb-4">
                 <div className="w-16 h-16 rounded-full bg-gradient-to-br from-yellow-400 to-yellow-600 flex items-center justify-center shadow-md transition-all hover:scale-110 hover:rotate-6">
                   <span className="text-3xl font-bold text-white">
@@ -76,7 +74,6 @@ const AlumniIndex = () => {
                 </div>
               </div>
 
-              {/* Info */}
               <h2 className="text-lg font-semibold text-gray-800 text-center">{a.name}</h2>
               <p className="text-sm text-gray-600 text-center">{a.rank}</p>
               <p className="text-sm font-medium text-center mt-1">
@@ -88,7 +85,7 @@ const AlumniIndex = () => {
         </div>
       )}
 
-      {/* ---------- GRID MODE + INFINITE SCROLL ---------- */}
+      {/* ---------- GRID MODE ---------- */}
       {mode === "grid" && (
         <>
           <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
@@ -98,7 +95,6 @@ const AlumniIndex = () => {
                 className="bg-white rounded-3xl p-5 shadow-md hover:shadow-xl border border-gray-200 transition-transform hover:-translate-y-1"
                 style={{ animation: `fadeIn 0.6s ease ${index * 0.07}s` }}
               >
-                {/* Avatar */}
                 <div className="flex justify-center mb-4">
                   <div className="w-16 h-16 rounded-full bg-gradient-to-br from-yellow-400 to-yellow-600 flex items-center justify-center shadow-md transition-all hover:scale-110 hover:-rotate-6">
                     <span className="text-3xl font-bold text-white">
@@ -135,11 +131,6 @@ const AlumniIndex = () => {
         @keyframes fadeIn {
           from { opacity: 0; transform: translateY(8px); }
           to { opacity: 1; transform: translateY(0); }
-        }
-        .custom-scrollbar::-webkit-scrollbar { height: 6px; }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-          background: #c7c7c7;
-          border-radius: 10px;
         }
       `}</style>
     </div>
