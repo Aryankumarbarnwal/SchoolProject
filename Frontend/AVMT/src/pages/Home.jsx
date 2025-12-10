@@ -51,7 +51,7 @@ const Home = () => {
         <div
           className="absolute inset-0 bg-cover bg-center animate-kenburns"
           style={{
-            backgroundImage: "url('../Assets/SchoolImage2.png')",
+            backgroundImage: "url('./assets/SchoolImage2.png')",
           }}
         ></div>
 
@@ -95,7 +95,7 @@ const Home = () => {
             </a>
 
             <a
-              href="../Assets/Prospectus.docx"
+              href="../assets/Prospectus.docx"
               className="px-8 py-3 border-2 border-yellow-400 text-yellow-300 
                 text-lg font-semibold rounded-full shadow-lg hover:bg-yellow-500 
                 hover:text-black transition-all duration-300"
