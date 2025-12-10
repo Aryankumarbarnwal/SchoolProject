@@ -17,7 +17,7 @@ const PORT = process.env.PORT || 5000;
 
 // ✔ Correct CORS config (Only Once)
 app.use(cors({
-    origin: ["http://localhost:5174","https://school-project-9o8o-git-main-aryankumarbarnwals-projects.vercel.app/"],
+    origin: ["http://localhost:5174","https://school-project-9o8o-git-main-aryankumarbarnwals-projects.vercel.app"],
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE"],
 }));
