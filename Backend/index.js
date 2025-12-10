@@ -42,7 +42,7 @@ app.use('/api/admission', admissionRoutes);
 app.use('/api/contact', contactRoutes);
 
 // ✔ MongoDB Connection
-mongoose.connect("mongodb://localhost:27017/Registration")
+mongoose.connect("mongodb+srv://aryankumarbarnwal06:Aryan1234@cluster0.79v1kd4.mongodb.net/SchoolProject")
     .then(() => console.log("MongoDB Connected..."))
     .catch(err => console.log(err));
 
