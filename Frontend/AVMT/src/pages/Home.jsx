@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import image from "../assets/SchoolImage2.png";
 import AlumniIndex from "./AlumniCard.jsx";
 import AcademicAchievements from "./AcademicAchivements.jsx";
 import HomeGallerySection from "../components/HomeGallery.jsx";
@@ -51,7 +52,7 @@ const Home = () => {
         <div
           className="absolute inset-0 bg-cover bg-center animate-kenburns"
           style={{
-            backgroundImage: "url('./assets/SchoolImage2.png')",
+            backgroundImage: `url(${image})`,
           }}
         ></div>
 
