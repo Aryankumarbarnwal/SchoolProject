@@ -96,7 +96,9 @@ const Home = () => {
             </a>
 
             <a
-              href="../assets/Prospectus.docx"
+              href="/Prospectus.docx"
+              target="_blank"
+              rel="noopener noreferrer"
               className="px-8 py-3 border-2 border-yellow-400 text-yellow-300 
                 text-lg font-semibold rounded-full shadow-lg hover:bg-yellow-500 
                 hover:text-black transition-all duration-300"
