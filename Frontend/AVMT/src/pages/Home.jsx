@@ -82,7 +82,7 @@ const Home = () => {
 
           {/* Sub Text */}
           <p className="text-sm sm:text-base md:text-lg mb-6 sm:mb-8 leading-relaxed text-gray-200 mx-auto max-w-xl">
-            Established in 1997 under the leadership of
+            Established in 1998 under the leadership of
             <strong> Shri Neelkanth Kumar</strong>, our school continues its journey of excellence.
           </p>
 
@@ -204,7 +204,7 @@ const Home = () => {
               {/* LEFT SIDE — Text */}
               <div className="text-gray-800 text-base sm:text-lg leading-relaxed space-y-4">
                 <p>
-                  Established in <strong>1997</strong>, Adarsh Vidya Mandir has been a guiding
+                  Established in <strong>1998</strong>, Adarsh Vidya Mandir has been a guiding
                   light for quality rural education in Tilokari, Jainagar (Koderma).
                   Our mission is simple — <strong>affordable, value-based & disciplined education</strong>
                   for every child.
