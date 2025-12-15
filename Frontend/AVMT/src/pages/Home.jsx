@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import image from "../assets/SchoolImage2.png";
+import image2 from "../assets/school image.png";
+import eventImage1 from "../assets/EventsImage1.png"
 import AlumniIndex from "./AlumniCard.jsx";
 import AcademicAchievements from "./AcademicAchivements.jsx";
 import HomeGallerySection from "../components/HomeGallery.jsx";
@@ -36,31 +38,26 @@ const DynamicMotto = () => {
   return { index, fade };
 };
 
-
 const Home = () => {
-
   const { index, fade } = DynamicMotto();
-  const events = [{}];
+  const events = [];
 
   return (
-    <div className="relative top-0.5 w-full bg-gradient-to-br from-[#e0f2f1] via-white to-[#f1f8e9] rounded-lg overflow-hidden">
+    <div className="relative top-0.5 w-full rounded-xl bg-gradient-to-br from-[#e0f2f1] via-white to-[#f1f8e9] overflow-hidden">
 
-      {/* 🌟 HERO SECTION START */}
-      <section className="relative w-full min-h-[100vh] flex items-center justify-center overflow-hidden shadow-2xl">
+      {/* ---------------- HERO SECTION ---------------- */}
+      <section className="relative w-full min-h-[80vh] sm:min-h-[90vh] md:min-h-screen flex items-center justify-center overflow-hidden shadow-2xl">
 
         {/* Background Image */}
         <div
-          className="absolute inset-0 bg-cover bg-center animate-kenburns"
-          style={{
-            backgroundImage: `url(${image})`,
-          }}
+          className="absolute inset-0 bg-cover bg-center bg-top animate-kenburns hero-bg"
         ></div>
 
         {/* Dark Overlay */}
         <div className="absolute inset-0 bg-black/70"></div>
 
         {/* Floating particles */}
-        <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute inset-0 pointer-events-none hidden sm:block">
           <div className="particle"></div>
           <div className="particle"></div>
           <div className="particle"></div>
@@ -68,40 +65,48 @@ const Home = () => {
         </div>
 
         {/* Hero Text */}
-        <div className="relative z-10 p-10 text-center text-white max-w-4xl animate-fadeSlide">
-          <h1 className="text-4xl md:text-5xl font-extrabold mb-5">
+        <div className="relative z-10 px-4 sm:px-8 md:px-10 text-center text-white max-w-3xl md:max-w-4xl animate-fadeSlide">
+
+          {/* Main Heading */}
+          <h1 className="text-2xl sm:text-3xl md:text-5xl font-extrabold mb-4 sm:mb-5 leading-tight">
             Adarsh Vidya Mandir, Tilokari – Jainagar, Koderma (Jharkhand)
           </h1>
 
+          {/* Dynamic Motto */}
           <p
-            className={`text-xl md:text-2xl font-semibold text-yellow-300 mb-6 transition-all duration-700 ${fade ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
+            className={`text-base sm:text-lg md:text-2xl font-semibold text-yellow-300 mb-4 sm:mb-6 transition-all duration-700 ${fade ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
               }`}
           >
             “{mottos[index]}”
           </p>
 
-          <p className="text-lg mb-8 leading-relaxed text-gray-200 max-w-3xl mx-auto">
-            Established in 1997 under the leadership of <strong>Shri Neelkanth Kumar</strong>,
-            our school continues its journey of excellence.
+          {/* Sub Text */}
+          <p className="text-sm sm:text-base md:text-lg mb-6 sm:mb-8 leading-relaxed text-gray-200 mx-auto max-w-xl">
+            Established in 1997 under the leadership of
+            <strong> Shri Neelkanth Kumar</strong>, our school continues its journey of excellence.
           </p>
 
           {/* Buttons */}
-          <div className="flex flex-wrap justify-center gap-4 mt-4">
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-3 sm:gap-4 mt-4">
+
+            {/* Admission Button */}
             <a
               href="/admission"
-              className="px-8 py-3 bg-gradient-to-r from-yellow-400 to-orange-500 
-                text-white text-lg font-semibold rounded-full shadow-lg glow-btn"
+              className="w-full sm:w-auto px-6 sm:px-8 py-2.5 sm:py-3 bg-gradient-to-r from-yellow-400 to-orange-500 
+        text-white text-base sm:text-lg font-semibold rounded-full shadow-lg glow-btn text-center"
             >
               Apply for Admission
             </a>
 
+            {/* Prospectus Button */}
             <a
               href="/Prospectus.docx"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-8 py-3 border-2 border-yellow-400 text-yellow-300 
-                text-lg font-semibold rounded-full shadow-lg hover:bg-yellow-500 
-                hover:text-black transition-all duration-300"
+              download
+              className="w-full sm:w-auto px-6 sm:px-8 py-2.5 sm:py-3 border-2 border-yellow-400 text-yellow-300 
+        text-base sm:text-lg font-semibold rounded-full shadow-lg hover:bg-yellow-500 
+        hover:text-black transition-all duration-300 text-center"
             >
               Download Prospectus
             </a>
@@ -109,67 +114,86 @@ const Home = () => {
         </div>
 
         {/* Scroll Indicator */}
-        <div className="absolute bottom-12 animate-bounceSlow text-white text-3xl">
+        <div className="absolute bottom-8 sm:bottom-12 animate-bounceSlow text-white text-2xl sm:text-3xl">
           ↓
         </div>
       </section>
-      {/* 🌟 HERO SECTION END */}
 
-      {/* Divider Wave */}
-      <div className="w-full overflow-hidden -mt-4">
-        <svg className="w-lg" viewBox="0 0 1440 320">
-          <path fill="#f1f8e9" fillOpacity="1" d="M0,64L1440,192L1440,0L0,0Z"></path>
+
+      {/* Divider */}
+      {/* <div className="w-full overflow-hidden -mt-2">
+        <svg className="w-full" viewBox="0 0 1440 320">
+          <path fill="#f1f8e9" d="M0,64L1440,192L1440,0L0,0Z"></path>
         </svg>
-      </div>
+      </div> */}
 
-      {/* New School Stats Section */}
+      {/* School Stats */}
       <SchoolStats />
 
-      {/* 🟦 Alumni Section */}
-      <section className="px-6 py-10">
-        <div className="p-6 bg-[#ededf3] bg-opacity-40 backdrop-blur-lg rounded-3xl shadow-xl border border-white/20">
-          <h2 className="text-3xl font-bold mb-6 text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-green-500">
+      {/* Alumni */}
+      <section className="px-4 sm:px-6 py-10">
+        <div className="p-4 sm:p-6 bg-[#ededf3] bg-opacity-40 backdrop-blur-lg rounded-3xl shadow-xl">
+          <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-green-500">
             Alumni Portal
           </h2>
-          <AlumniIndex />
+          {/* Desktop Version (unchanged) */}
+          <div className="hidden md:block">
+            <AlumniIndex />
+          </div>
+
+          {/* Mobile Version – Horizontal Scroll */}
+          <div className="md:hidden overflow-x-auto flex gap-4 pb-4">
+            {[1, 2, 3, 4, 5].map((a) => (
+              <div
+                key={a}
+                className="min-w-[180px] bg-white rounded-2xl p-4 shadow-lg border border-gray-200"
+              >
+                <div className="w-14 h-14 bg-yellow-500 rounded-full flex items-center justify-center text-white font-bold text-2xl mx-auto">
+                  A
+                </div>
+
+                <h3 className="text-base font-semibold text-center mt-2">Alumni Name</h3>
+                <p className="text-xs text-center text-gray-500">Position @ Company</p>
+                <p className="text-xs text-center text-gray-400 mt-1">Batch 2021</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
-
-
-      {/* 🟩 Academic Achievements */}
-      <section className="relative mt-10 px-6 max-w-7xl mx-auto">
-        <div className="bg-white/900 backdrop-blur-md shadow-2xl rounded-3xl p-10 border border-white/40">
-          <div className="h-2 w-32 bg-gradient-to-r from-yellow-500 to-green-500 rounded-full mx-auto mb-6"></div>
+      {/* Achievements */}
+      <section className="mt-10 px-4 sm:px-6 max-w-7xl mx-auto">
+        <div className="rounded-3xl p-6 sm:p-10 bg-white/60 backdrop-blur-md shadow-2xl border border-white/40">
 
           <AcademicAchievements />
 
-          <div className="my-8 w-full h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent"></div>
-
-          <div className="flex justify-center">
+          <div className="flex justify-center mt-8">
             <a
               href="/achievements"
               className="px-8 py-3 bg-gradient-to-r from-yellow-500 to-yellow-700 
-                text-white font-semibold rounded-xl shadow-md hover:shadow-xl 
-                hover:scale-[1.03] transition-all duration-300"
+              text-white font-semibold rounded-xl shadow-md hover:scale-[1.03] transition duration-300"
             >
               View All Achievements →
             </a>
           </div>
         </div>
+
       </section>
 
       {/* 🟩 About Preview  */}
-      <section className="px-6 py-16">
+      <section className="px-4 sm:px-6 py-12 sm:py-16">
         <div className="relative max-w-6xl mx-auto">
 
-          {/* Decorative Gradient Border */}
-          <div className="absolute inset-0 bg-gradient-to-r from-yellow-500 via-green-600 to-blue-700 rounded-3xl blur-xl opacity-30"></div>
+          {/* Decorative Gradient Border (desktop only) */}
+          <div className="absolute inset-0 bg-gradient-to-r from-yellow-500 via-green-600 to-blue-700 
+      rounded-3xl blur-xl opacity-20 hidden md:block">
+          </div>
 
-          <div className="relative bg-white/70 backdrop-blur-2xl rounded-3xl shadow-2xl p-10 border border-white/40">
+          <div className="relative bg-white/80 backdrop-blur-xl rounded-3xl shadow-2xl p-6 sm:p-10 border border-white/40">
 
             {/* Section Title */}
-            <h2 className="text-4xl font-extrabold text-center bg-clip-text text-transparent p-1
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold 
+        text-center bg-clip-text text-transparent p-1
         bg-gradient-to-r from-green-700 to-blue-700 tracking-wide mb-8">
               About Adarsh Vidya Mandir
             </h2>
@@ -177,8 +201,8 @@ const Home = () => {
             {/* Two Column Layout */}
             <div className="grid md:grid-cols-2 gap-10 items-center">
 
-              {/* Left Text Block */}
-              <div className="text-gray-800 text-lg leading-relaxed space-y-5">
+              {/* LEFT SIDE — Text */}
+              <div className="text-gray-800 text-base sm:text-lg leading-relaxed space-y-4">
                 <p>
                   Established in <strong>1997</strong>, Adarsh Vidya Mandir has been a guiding
                   light for quality rural education in Tilokari, Jainagar (Koderma).
@@ -199,7 +223,8 @@ const Home = () => {
                 {/* CTA */}
                 <a
                   href="/about"
-                  className="inline-block mt-4 px-7 py-3 text-lg font-semibold text-white rounded-full
+                  className="inline-block mt-2 px-6 sm:px-8 py-2.5 sm:py-3 text-base sm:text-lg 
+            font-semibold text-white rounded-full
             bg-gradient-to-r from-green-500 to-blue-600 hover:scale-[1.05] shadow-lg 
             hover:shadow-xl transition-all duration-300"
                 >
@@ -207,28 +232,19 @@ const Home = () => {
                 </a>
               </div>
 
-              {/* Right Side – Image + Signature Card */}
+              {/* RIGHT SIDE — Avatar */}
               <div className="flex flex-col items-center">
 
-                {/* Principal Photo
-                <div className="w-64 h-64 rounded-2xl overflow-hidden shadow-2xl border-4 
-            border-white/70">
-                  <img
-                    src="../Assets/principal.png"
-                    alt="Principal"
-                    className="w-full h-full object-cover"
-                  />
-                </div> */}
-                {/* Avatar (Auto name initial) */}
-                <div className="relative">
-                  {/* Outer Soft Glow Ring */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-yellow-400 to-green-500 rounded-full blur-xl opacity-40"></div>
+                <div className="relative w-32 h-32 sm:w-40 sm:h-40 md:w-44 md:h-44">
+                  {/* Outer Glow (desktop only) */}
+                  {/* <div className="absolute inset-0 bg-gradient-to-br from-yellow-400 to-green-500 
+              rounded-full blur-xl opacity-30 hidden md:block"></div> */}
 
-                  {/* Avatar Circle */}
-                  <div className="w-44 h-44 rounded-full bg-gradient-to-br from-yellow-400 to-green-100 
-            flex items-center justify-center shadow-2xl border-4 border-white
-            text-white text-6xl font-bold select-none
-            transition-all duration-300 hover:scale-110 hover:shadow-[0_0_40px_rgba(0,0,0,0.25)]">
+                  {/* Avatar */}
+                  {/* <div className="w-full h-full rounded-full bg-gradient-to-br from-yellow-400 to-green-200 
+              flex items-center justify-center shadow-xl border-4 border-white 
+              text-white text-5xl sm:text-6xl font-bold select-none
+              transition-all duration-300 hover:scale-105 hover:shadow-2xl">
                     {(() => {
                       const name = "Mr. Neelkanth Kumar";
                       const ignore = ["mr", "mr.", "mrs", "ms", "miss", "dr", "dr.", "sir", "er"];
@@ -237,63 +253,61 @@ const Home = () => {
                       return parts[0]?.charAt(0).toUpperCase() || "N";
                     })()}
                   </div>
+                   */}
+                  <div className="w-35 h-35 mx-auto rounded-full bg-gradient-to-br from-green-600 to-blue-600 flex items-center justify-center 
+                  shadow-xl text-white text-6xl font-bold select-none">
+                    {(() => {
+                      const name = "Neelkanth Kumar";  // Founder name
+                      const initials = name.split(" ").map(n => n[0]).join("").toUpperCase();
+                      return initials;
+                    })()}
+                  </div>
+
                 </div>
 
-                {/* Name + Signature */}
                 <div className="text-center mt-4">
-                  <p className="text-xl font-bold text-gray-800">Mr. Neelkanth Kumar</p>
+                  <p className="text-lg font-bold text-gray-800">Mr. Neelkanth Kumar</p>
                   <p className="text-sm text-gray-500">Founder & Principal</p>
-
-                  {/* Optional signature image */}
-                  {/* <img src="/signature.png" className="w-28 mx-auto mt-2 opacity-90" /> */}
                 </div>
-              </div>
 
+              </div>
             </div>
 
           </div>
         </div>
       </section>
 
-      {/*Facilities Section */}
-      <section className="mt-20">
-        <div className="bg-gradient-to-br from-[#e8e2e2] via-[#e7e8ec] to-[#ebedec] 
-      rounded-3xl shadow-xl border border-white/50 p-12 relative overflow-hidden">
 
-          {/* Decorative Background Blobs */}
-          <div className="absolute top-0 right-0 w-72 h-72 bg-yellow-200 opacity-20 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-0 left-0 w-64 h-64 bg-green-200 opacity-20 rounded-full blur-3xl"></div>
+      {/* Facilities */}
+      <section className="mt-10 sm:mt-20 px-4 sm:px-6">
 
-          <h2 className="text-4xl font-extrabold text-center mb-12 bg-clip-text
-        text-transparent bg-gradient-to-r from-yellow-600 to-green-600">
+        <div className="p-6 sm:p-12 rounded-3xl shadow-xl bg-gradient-to-br from-[#e8e2e2] via-[#e7e8ec] to-[#ebedec]">
+
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-center mb-10 bg-clip-text text-transparent bg-gradient-to-r from-yellow-600 to-green-600">
             Our School Facilities
           </h2>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 relative z-10">
-
+          <div className="facility-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 relative z-10">
             {/* CARD 1 — Smart Classes */}
             <div className="facility-card group">
               <div className="card-inner">
                 <div className="card-front">
-                  <div className="icon-box bg-yellow-100">
-                    📚
-                  </div>
+                  <div className="icon-box bg-yellow-100"> 📚 </div>
                   <h3 className="card-title">Smart Classes</h3>
                   <p className="card-text">Modern digital classrooms with projector & interactive learning.</p>
                 </div>
                 <div className="card-back">
-                  <p className="back-text">AVM provides modern infrastructure, advanced learning tools, and a safe environment
-                    for holistic growth of every child.</p>
+                  <p className="back-text">
+                    AVM provides modern infrastructure, advanced learning tools, and a safe environment for holistic growth of every child.
+                  </p>
                 </div>
               </div>
             </div>
-
             {/* CARD 2 — Library */}
             <div className="facility-card group">
               <div className="card-inner">
                 <div className="card-front">
-                  <div className="icon-box bg-green-100">
-                    📖
+                  <div className="icon-box bg-green-100"> 📖
                   </div>
                   <h3 className="card-title">Library</h3>
                   <p className="card-text">A peaceful environment with 2000+ books & study resources.</p>
@@ -303,98 +317,94 @@ const Home = () => {
                 </div>
               </div>
             </div>
-
             {/* CARD 3 — Computer Lab */}
             <div className="facility-card group">
               <div className="card-inner">
                 <div className="card-front">
-                  <div className="icon-box bg-blue-100">
-                    💻
+                  <div className="icon-box bg-blue-100"> 💻
                   </div>
                   <h3 className="card-title">Computer Lab</h3>
                   <p className="card-text">Fully equipped lab for practical computer learning.</p>
                 </div>
                 <div className="card-back">
-                  <p className="back-text">Fully equipped computer lab where students learn modern digital skills
-                    essential for the future.</p>
+                  <p className="back-text">Fully equipped computer lab where students learn modern digital skills essential for the future.</p>
                 </div>
               </div>
             </div>
-
             {/* CARD 4 — Transport */}
             <div className="facility-card group">
               <div className="card-inner">
                 <div className="card-front">
-                  <div className="icon-box bg-orange-100">
-                    🚌
+                  <div className="icon-box bg-orange-100"> 🚌
                   </div>
                   <h3 className="card-title">Transport</h3>
                   <p className="card-text">Safe and reliable bus service across nearby areas.</p>
                 </div>
                 <div className="card-back">
-                  <p className="back-text">GPS-enabled routes & trained drivers for safety. Safe and reliable transport covering nearby towns and villages with trained
-                    drivers and attendants.</p>
+                  <p className="back-text">GPS-enabled routes & trained drivers for safety. Safe and reliable transport covering nearby towns and villages with trained drivers and attendants.</p>
                 </div>
               </div>
             </div>
-
             {/* CARD 5 — Safety / CCTV */}
             <div className="facility-card group">
               <div className="card-inner">
                 <div className="card-front">
-                  <div className="icon-box bg-red-100">
-                    🎥
+                  <div className="icon-box bg-red-100"> 🎥
                   </div>
                   <h3 className="card-title">24×7 CCTV Security</h3>
                   <p className="card-text">Complete surveillance for student safety.</p>
                 </div>
                 <div className="card-back">
-                  <p className="back-text">CCTV in classrooms, corridors & school campus. Campus monitored with CCTV surveillance, ensuring a safe and disciplined
-                    learning environment for all students.</p>
+                  <p className="back-text">CCTV in classrooms, corridors & school campus. Campus monitored with CCTV surveillance, ensuring a safe and disciplined learning environment for all students.</p>
                 </div>
               </div>
             </div>
-
             {/* CARD 6 — Play Area */}
             <div className="facility-card group">
               <div className="card-inner">
                 <div className="card-front">
-                  <div className="icon-box bg-purple-100">
-                    ⚽
+                  <div className="icon-box bg-purple-100"> ⚽
                   </div>
                   <h3 className="card-title">Sports & Playground</h3>
                   <p className="card-text">Open playground promoting physical fitness.</p>
                 </div>
                 <div className="card-back">
-                  <p className="back-text">Regular sports, yoga, cultural activities, and competitions promote fitness,
-                    teamwork, and confidence.</p>
+                  <p className="back-text">Regular sports, yoga, cultural activities, and competitions promote fitness, teamwork, and confidence.</p>
                 </div>
               </div>
             </div>
-
           </div>
         </div>
+
       </section>
 
-      {/* Testimonials Section */}
+      {/* Testimonials */}
       <Testimonials />
 
-      {/* Gallery Section */}
+      {/* Gallery */}
       <HomeGallerySection />
 
-      {/* Upcoming Events */}
-      <UpcomingEvents events={events} />
+      {/* Events */}
+      <UpcomingEvents events={events} emptyImage={eventImage1} />
 
-      {/* Contact Info */}
+      {/* Contact */}
       <ContactSection />
 
-      {/* Footer Section */}
+      {/* Footer */}
       <Footer />
-
 
       {/* Animations */}
       <style>
         {`
+        .hero-bg {
+          background-image: url(${image2}); /* MOBILE IMAGE */
+        }
+
+        @media (min-width: 640px) {
+          .hero-bg {
+            background-image: url(${image}); /* DESKTOP IMAGE */
+          }
+        }
         @keyframes kenburns {
           0% { transform: scale(1); }
           100% { transform: scale(1.15); }
@@ -498,11 +508,61 @@ const Home = () => {
       font-weight: 500;
       padding: 10px;
     }
+    
+    /* MOBILE ONLY FIXES */
+  @media (max-width: 640px) {
+  /* Make grid 2 columns on small screens */
+  .facility-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 14px !important;
+  }
+
+  /* Card adjustments */
+  .facility-card {
+    padding: px !important;
+    border-radius: 16px !important;
+  }
+
+  /* Remove flip animation on mobile */
+  .card-inner,
+  .card-front,
+  .card-back {
+    transform: none !important;
+    position: relative !important;
+    height: auto !important;
+    backface-visibility: visible !important;
+  }
+  .card-back {
+    display: none !important; /* No flip on mobile */
+  }
+
+  /* Smaller icons */
+  .icon-box {
+    width: 46px !important;
+    height: 46px !important;
+    font-size: 20px !important;
+    margin-bottom: 10px !important;
+  }
+
+  /* Text readability */
+  .card-title {
+    font-size: 1rem !important;
+    margin-bottom: 2px !important;
+  }
+
+  .card-text {
+    font-size: 0.8rem !important;
+    line-height: 1.3 !important;
+  }
+}
         `}
       </style>
-
     </div>
   );
 };
 
 export default Home;
+
+
+
+
