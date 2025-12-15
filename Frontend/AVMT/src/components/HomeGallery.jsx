@@ -4,13 +4,37 @@ import { Link } from "react-router-dom";
 
 const GalleryPreview = () => {
   const [recent, setRecent] = useState([]);
-  const [preview, setPreview] = useState(null); // For modal
+  const [preview, setPreview] = useState(null);
 
   const fetchRecent = async () => {
     try {
       const res = await getGalleryItems(1);
       const list = res.data.items || res.data;
-      setRecent(list.slice(0, 8));
+
+      const optimized = list.slice(0, 10).map((item) => ({
+        ...item,
+
+        // --- IMAGE & VIDEO TINY VERSION ---
+        tiny:
+          item.type === "image"
+            ? item.url + "?w=200&auto=compress&fit=crop"
+            : item.url + "?q=20&w=200&auto=compress",
+
+        // --- HD IMAGE & VIDEO ---
+        hd:
+          item.type === "image"
+            ? item.url + "?w=1200&auto=compress"
+            : item.url + "?q=80&w=1200&auto=compress",
+
+        // --- POSTER FOR VIDEO ---
+        poster:
+          item.type === "video"
+            ? item.url.replace(".mp4", ".jpg").replace("/upload/", "/upload/w_300,f_jpg,q_auto/")
+            : null,
+      }));
+
+      setRecent(optimized);
+
     } catch {
       console.log("Error loading gallery preview");
     }
@@ -22,46 +46,78 @@ const GalleryPreview = () => {
 
   return (
     <>
-      {/* MAIN SECTION */}
-      <section className="py-16 bg-gradient-to-br from-yellow-100 via-white to-yellow-200">
-        <div className="max-w-7xl mx-auto px-6">
+      <section className="py-10 bg-gradient-to-br from-yellow-100 via-white to-yellow-200">
+        <div className="max-w-7xl mx-auto px-3 ">
 
           <h2 className="text-4xl font-extrabold text-center text-yellow-700 mb-8 drop-shadow">
             School Gallery
           </h2>
 
-          {/* Horizontal Scroll */}
-          <div className="flex gap-6 overflow-x-auto pb-4 px-2 scrollbar-thin scrollbar-thumb-yellow-500">
-            {recent.map((item) => (
+          {/* MOBILE VIEW */}
+          <div className="block md:hidden">
+            <div className="grid grid-cols-5 gap-[2px] h-[220px] overflow-y-scroll pr-1">
+
+              {recent.map((item) => (
+                <div key={item._id}>
+                  {item.type === "image" ? (
+                    <img
+                      src={item.tiny}
+                      loading="lazy"
+                      onClick={() => setPreview(item)}
+                      className="w-full h-16 object-cover rounded-md cursor-pointer hover:scale-105 transition"
+                    />
+                  ) : (
+                    <video
+                      src={item.tiny}
+                      poster={item.poster}
+                      preload="none"
+                      muted
+                      playsInline
+                      onClick={() => setPreview(item)}
+                      className="w-full h-16 object-cover rounded-md cursor-pointer"
+                    />
+                  )}
+                </div>
+              ))}
+            </div>
+
+            {/* Mobile button ONLY */}
+            <div className="flex justify-center mt-2 md:hidden">
+              <Link
+                to="/gallery"
+                className="px-6 py-2 bg-yellow-600 text-white rounded-full text-base font-semibold shadow-lg hover:bg-yellow-700"
+              >
+                View Full Gallery
+              </Link>
+            </div>
+          </div>
+
+          {/* DESKTOP VIEW */}
+          <div className="hidden md:flex gap-6 overflow-x-auto pb-4 px-2">
+            {recent.slice(0, 8).map((item) => (
               <div
                 key={item._id}
                 onClick={() => setPreview(item)}
-                className="min-w-[260px] rounded-xl shadow-xl bg-white cursor-pointer
-                           hover:shadow-2xl hover:scale-[1.03] transition-all duration-300 overflow-hidden"
+                className="min-w-[260px] rounded-xl bg-white shadow-xl cursor-pointer hover:scale-[1.03] transition"
               >
-                <div className="h-48 bg-gray-200 group relative">
-
-                  {/* Image Preview */}
-                  {item.type === "image" && (
+                <div className="h-48 bg-gray-200 relative overflow-hidden group">
+                  {item.type === "image" ? (
                     <img
-                      src={item.url}
-                      className="w-full h-full object-cover group-hover:brightness-90 transition"
+                      src={item.tiny}
                       loading="lazy"
+                      className="w-full h-full object-cover group-hover:brightness-90 transition"
                     />
-                  )}
-
-                  {/* Video Preview (autoPlay on hover) */}
-                  {item.type === "video" && (
+                  ) : (
                     <video
-                      src={item.url}
+                      src={item.tiny}
+                      poster={item.poster}
+                      preload="none"
                       muted
+                      playsInline
                       className="w-full h-full object-cover"
-                      onMouseEnter={e => e.target.play()}
-                      onMouseLeave={e => e.target.pause()}
                     />
                   )}
 
-                  {/* Overlay label */}
                   <span className="absolute bottom-2 right-2 bg-yellow-600 text-white text-xs px-2 py-1 rounded-full shadow">
                     {item.type}
                   </span>
@@ -78,32 +134,28 @@ const GalleryPreview = () => {
               </div>
             ))}
 
-            {/* View Full Gallery Card */}
+            {/* Desktop view button */}
             <Link
               to="/gallery"
-              className="min-w-[260px] flex justify-center items-center rounded-xl bg-white border-2
-                         border-yellow-500 text-yellow-600 text-lg font-bold shadow-lg hover:bg-yellow-50
-                         transition-all duration-300"
+              className="min-w-[260px] hidden md:flex justify-center items-center rounded-xl bg-white border-2 border-yellow-500 text-yellow-600 text-lg font-bold shadow-lg"
             >
               View Full Gallery →
             </Link>
           </div>
+        </div>
 
-          {/* Explore Button */}
-          <div className="flex justify-center mt-6">
-            <Link
-              to="/gallery"
-              className="px-8 py-3 bg-yellow-600 text-white text-lg font-semibold rounded-full
-                         shadow-xl hover:bg-yellow-700 hover:scale-105 transition"
-            >
-              Explore Full Gallery
-            </Link>
-          </div>
-
+        {/* Desktop Explore button ONLY */}
+        <div className="flex justify-center mt-6 hidden md:flex">
+          <Link
+            to="/gallery"
+            className="px-8 py-3 bg-yellow-600 text-white text-lg font-semibold rounded-full shadow-xl hover:bg-yellow-700"
+          >
+            Explore Full Gallery
+          </Link>
         </div>
       </section>
 
-      {/* PREVIEW MODAL */}
+      {/* Modal */}
       {preview && (
         <div
           className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-6"
@@ -122,23 +174,10 @@ const GalleryPreview = () => {
 
             <div className="flex justify-center">
               {preview.type === "video" ? (
-                <video
-                  src={preview.url}
-                  controls
-                  autoPlay
-                  className="max-h-[70vh] rounded"
-                />
+                <video src={preview.hd} controls autoPlay className="max-h-[70vh] rounded" />
               ) : (
-                <img
-                  src={preview.url}
-                  className="max-h-[70vh] rounded object-contain"
-                />
+                <img src={preview.hd} className="max-h-[70vh] rounded object-contain" />
               )}
-            </div>
-
-            <div className="mt-4">
-              <h3 className="text-xl font-bold">{preview.caption}</h3>
-              <p className="text-gray-600 text-sm">{preview.event}</p>
             </div>
           </div>
         </div>
