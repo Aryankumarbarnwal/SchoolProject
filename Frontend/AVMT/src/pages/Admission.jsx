@@ -39,21 +39,24 @@ const Admission = () => {
             </div>
           </div>
 
+          
+        </div>
+
+        {/* Right Side - Form */}
+        <div>
           {submitted && (
             <div className="mt-4 p-4 rounded-xl bg-green-50 border border-green-200 text-green-800 text-sm">
               ✅ Thank you <span className="font-semibold">{studentName}</span>, your admission form
               has been submitted successfully. Our team will contact you soon.
             </div>
           )}
-        </div>
-
-        {/* Right Side - Form */}
-        <AdmissionForm
+          <AdmissionForm
           onSuccess={(name) => {
             setStudentName(name);
             setSubmitted(true);
           }}
         />
+        </div>
       </div>
     </div>
   );
