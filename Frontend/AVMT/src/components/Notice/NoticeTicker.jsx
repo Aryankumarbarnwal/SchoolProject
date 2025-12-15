@@ -21,7 +21,7 @@ const NoticeTicker = () => {
   const loopNotices = [...notices];
 
   return (
-    <div className="w-full bg-yellow-600 text-white py-2 overflow-hidden shadow-md select-none ticker-container">
+    <div className="w-full bg-yellow-600 text-white py-0.5 rounded-xl overflow-hidden shadow-md select-none ticker-container">
 
       {/* Ticker wrapper */}
       <div className="ticker-content">
