@@ -1,15 +1,21 @@
-
-const UpcomingEvents = ({ events = [] }) => {
+const UpcomingEvents = ({ events = [], emptyImage }) => {
   return (
     <section className="py-16 bg-gray-50">
       <h2 className="text-4xl font-extrabold text-center text-yellow-700 mb-10">
         🎉 Upcoming Events
       </h2>
 
+      {/* If NO EVENTS → show image instead of text */}
       {events.length === 0 ? (
-        <p className="text-center text-gray-600">No events scheduled.</p>
+        <div className="flex justify-center">
+          <img
+            src={emptyImage}        // <-- You will pass image here
+            alt="No Events"
+            className="w-64 sm:w-80 md:w-96 opacity-90 rounded-xl shadow-lg"
+          />
+        </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-6 md:px-0">
           {events.map((ev, i) => (
             <div
               key={i}
@@ -47,3 +53,4 @@ const UpcomingEvents = ({ events = [] }) => {
 };
 
 export default UpcomingEvents;
+
