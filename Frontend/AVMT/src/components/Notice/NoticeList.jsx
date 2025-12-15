@@ -9,15 +9,19 @@ const NoticeList = ({ notices, onClick }) => {
   }
 
   return (
-    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-2 sm:px-4">
       {notices.map((n) => (
         <div
           key={n._id}
           onClick={() => onClick && onClick(n)}
-          className="cursor-pointer border bg-white rounded-xl shadow hover:shadow-lg p-5 transition"
+          className="
+            cursor-pointer border bg-white rounded-2xl shadow-md 
+            hover:shadow-xl transition-all duration-300 p-5 
+            flex flex-col group
+          "
         >
           {/* Title */}
-          <h3 className="text-xl font-bold text-yellow-700 mb-2">
+          <h3 className="text-xl font-bold text-yellow-700 mb-2 group-hover:text-yellow-800 transition">
             {n.title}
           </h3>
 
@@ -26,21 +30,27 @@ const NoticeList = ({ notices, onClick }) => {
             {new Date(n.createdAt).toLocaleDateString()}
           </p>
 
-          {/* Image preview */}
+          {/* Image */}
           {n.image && (
             <img
               src={n.image}
               alt="Notice"
-              className="w-full h-40 object-cover rounded mb-3 border"
+              className="w-full h-40 object-cover rounded-xl mb-3 border shadow-sm 
+              group-hover:scale-[1.02] transition-all duration-300"
             />
           )}
 
-          {/* Preview Desc */}
-          <p className="text-gray-700 text-sm">
-            {n.description.slice(0, 100)}...
+          {/* Description Preview */}
+          <p className="text-gray-700 text-sm flex-grow line-clamp-3">
+            {n.description}
           </p>
 
-          <button className="mt-3 text-yellow-700 font-semibold hover:underline">
+          <button
+            className="
+              mt-4 text-yellow-700 font-semibold hover:underline 
+              group-hover:text-yellow-800 transition
+            "
+          >
             Read More →
           </button>
         </div>
@@ -50,3 +60,4 @@ const NoticeList = ({ notices, onClick }) => {
 };
 
 export default NoticeList;
+
